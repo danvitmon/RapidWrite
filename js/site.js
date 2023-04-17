@@ -1,172 +1,127 @@
-function add() {
-  // get the numbers
-  let numberOne = document.getElementById("firstNumber").value;
-  let numberTwo = document.getElementById("secondNumber").value;
+var events = [
+  {
+    event: "ComicCon",
+    city: "New York",
+    state: "New York",
+    attendance: 240000,
+    date: "06/01/2017",
+  },
+  {
+    event: "ComicCon",
+    city: "New York",
+    state: "New York",
+    attendance: 250000,
+    date: "06/01/2018",
+  },
+  {
+    event: "ComicCon",
+    city: "New York",
+    state: "New York",
+    attendance: 257000,
+    date: "06/01/2019",
+  },
+  {
+    event: "ComicCon",
+    city: "San Diego",
+    state: "California",
+    attendance: 130000,
+    date: "06/01/2017",
+  },
+  {
+    event: "ComicCon",
+    city: "San Diego",
+    state: "California",
+    attendance: 140000,
+    date: "06/01/2018",
+  },
+  {
+    event: "ComicCon",
+    city: "San Diego",
+    state: "California",
+    attendance: 150000,
+    date: "06/01/2019",
+  },
+  {
+    event: "HeroesCon",
+    city: "Charlotte",
+    state: "North Carolina",
+    attendance: 40000,
+    date: "06/01/2017",
+  },
+  {
+    event: "HeroesCon",
+    city: "Charlotte",
+    state: "North Carolina",
+    attendance: 45000,
+    date: "06/01/2018",
+  },
+  {
+    event: "HeroesCon",
+    city: "Charlotte",
+    state: "North Carolina",
+    attendance: 50000,
+    date: "06/01/2019",
+  },
+];
 
-  // turn them into integers
-  numberOne = parseFloat(numberOne);
-  numberTwo = parseFloat(numberTwo);
+// build dropdown for specific cities
+function buildDropDown() {
+  let dropdownMenu = document.getElementById("eventDropDown");
+  dropdownMenu.innerHTML = "";
 
-  // add the first and second numbers
-  let sum = numberOne + numberTwo;
+  let currentEvents = events; // todo - get these from storage
 
-  // display the result
-  let resultsDiv = document.getElementById("results");
-  resultsDiv.innerText = sum;
-}
+  let cityNames = currentEvents.map((event) => event.city);
+  let citiesSet = new Set(cityNames);
+  let distinctCities = [...citiesSet]; // ['Charlotte', 'San Diego']
 
-function subtract() {
-  let numberOne = document.getElementById("firstNumber").value;
-  let numberTwo = document.getElementById("secondNumber").value;
+  const dropdownTemplate = document.getElementById("dropdownItemTemplate");
 
-  numberOne = parseFloat(numberOne);
-  numberTwo = parseFloat(numberTwo);
+  // copy the template
+  let dropdownItemNode = document.importNode(dropdownTemplate.content, true);
 
-  let sum = numberOne - numberTwo;
+  // make our changes
+  let dropdownItemLink = dropdownItemNode.querySelector("a");
+  dropdownItemLink.innerText = "All Cities";
+  dropdownItemLink.setAttribute("data-string", "All");
 
-  let resultsDiv = document.getElementById("results");
-  resultsDiv.innerText = sum;
-}
+  // add our copy to the page
+  dropdownMenu.appendChild(dropdownItemNode);
 
-function multiply() {
-  let numberOne = document.getElementById("firstNumber").value;
-  let numberTwo = document.getElementById("secondNumber").value;
+  for (let i = 0; i < distinctCities.length; i += 1) {
+    // get the city name
+    let cityName = distinctCities[i];
 
-  numberOne = parseFloat(numberOne);
-  numberTwo = parseFloat(numberTwo);
+    // generate a dropdown element
+    let itemNode = document.importNode(dropdownTemplate.content, true);
+    let anchorTag = itemNode.querySelector("a");
+    anchorTag.innerText = cityName;
+    anchorTag.setAttribute("data-string", cityName);
 
-  let sum = numberOne * numberTwo;
-
-  let resultsDiv = document.getElementById("results");
-  resultsDiv.innerText = sum;
-}
-
-function divide() {
-  let numberOne = document.getElementById("firstNumber").value;
-  let numberTwo = document.getElementById("secondNumber").value;
-
-  numberOne = parseFloat(numberOne);
-  numberTwo = parseFloat(numberTwo);
-
-  let sum = numberOne / numberTwo;
-
-  if (numberTwo == 0) {
-    sum = "Cannot divide by zero";
+    // append it to the dropdown menu
+    dropdownMenu.appendChild(itemNode);
   }
 
-  let resultsDiv = document.getElementById("results");
-  resultsDiv.innerText = sum;
+  displayEventData(currentEvents);
 }
 
-function sumAll() {
-  let numberString = document.getElementById("numberSeries").value;
-  // numberString = '12345'
+function displayEventData(currentEvents) {
 
-  let numberArr = numberString.split("");
-  // numberArr = ['1', '2', '3', '4', '5']
+  const eventTable = document.getElementById('eventTable');
+  const template = document.getElementById('tableRowTemplate');
 
-  let sum = 0; // running total
+  eventTable.innerHTML = '';
 
-  for (let i = 0; i < numberArr.length; i = i + 1) {
-    let currentNumber = numberArr[i];
-    // currentNumber = '1'
+  for (let i = 0; i < currentEvents.length; i++) {
+    let event = currentEvents[i];
+    let tableRow = document.importNode(template.content, true);
 
-    currentNumber = parseInt(currentNumber);
-    // currentNumber = 1
+    tableRow.querySelector('[data-id="event"]').textContent = event.event;
+    tableRow.querySelector('[data-id="city"]').textContent = event.city;
+    tableRow.querySelector('[data-id="state"]').textContent = event.state;
+    tableRow.querySelector('[data-id="attendance"]').textContent = event.attendance;
+    tableRow.querySelector('[data-id="date"]').textContent = event.date;
 
-    sum = sum + currentNumber;
+    eventTable.appendChild(tableRow);
   }
-
-  let resultsDiv = document.getElementById("results");
-  resultsDiv.innerText = sum;
-}
-
-function multiplyAll() {
-
-    let numberString = document.getElementById("numberSeries").value;
-  
-    let numberArr = numberString.split("");
-  
-    let sum = 1;
-  
-    for (let i = 0; i < numberArr.length; i = i + 1) {
-      let currentNumber = numberArr[i];
-  
-      currentNumber = parseInt(currentNumber);
-  
-      sum = sum * currentNumber;
-    }
-  
-    let resultsDiv = document.getElementById("results");
-    resultsDiv.innerText = sum;
-}
-
-function minimum() {
-  let numberString = document.getElementById("numberSeries").value;
-
-  let numberArr = numberString.split("");
-
-  let min = parseInt(numberArr[0]);
-
-  for (let i = 0; i < numberArr.length; i = i + 1) {
-    let currentNumber = numberArr[i];
-    
-    currentNumber = parseInt(currentNumber);
-
-    if(currentNumber < min) {
-      max = currentNumber;
-    }
-
-  }
-
-  let resultsDiv = document.getElementById("results");
-  resultsDiv.innerText = min;
-}
-
-function maximum() {
-
-    let numberString = document.getElementById("numberSeries").value;
-
-    let numberArr = numberString.split("");
-  
-    let max = parseInt(numberArr[0]);
-  
-    for (let i = 0; i < numberArr.length; i = i + 1) {
-      let currentNumber = numberArr[i];
-      
-      currentNumber = parseInt(currentNumber);
-
-      if(currentNumber > max) {
-        max = currentNumber;
-      }
-  
-    }
-  
-    let resultsDiv = document.getElementById("results");
-    resultsDiv.innerText = max;
- // check each number and see if its larger than
- // the largest number ive found so far
-}
-
-function average() {
-    // get the sum of all
-    // divide the sum by the amount of numbers
-    // display it
-  let numberString = document.getElementById("numberSeries").value;
-
-  let numberArr = numberString.split("");
-
-  let sum = 0;
-
-  for (let i = 0; i < numberArr.length; i = i + 1) {
-    let currentNumber = numberArr[i];
-
-    currentNumber = parseInt(currentNumber);
-
-    sum = sum + currentNumber;
-    avg = sum / numberArr.length;
-  }
-
-  let resultsDiv = document.getElementById("results");
-  resultsDiv.innerText = avg;
 }
