@@ -108,7 +108,7 @@
             </ul>
           </div>
         <table class="table table-striped border shadow">
-          <thead>
+          <thead class="table-dark">
             <tr>
               <th colspan="2">Stats For <span id="location">All Events</span></th>
             </tr>
@@ -116,19 +116,19 @@
           <tbody>
             <tr>
               <td>Total Attendance</td>
-              <td id="total">100</td>
+              <td id="total"></td>
             </tr>
             <tr>
               <td>Average Attendance</td>
-              <td id="average">100</td>
+              <td id="average"></td>
             </tr>
             <tr>
               <td>Most Attendance</td>
-              <td id="most">100</td>
+              <td id="most"></td>
             </tr>
             <tr>
               <td>Least Attendance</td>
-              <td id="least">100</td>
+              <td id="least"></td>
             </tr>
           </tbody>
         </table>
@@ -201,17 +201,17 @@
     <!-- templates -->
     <template id="dropdownItemTemplate">
       <li>
-        <a class="dropdown-item" href="#" data-string="All"></a>
+        <a class="dropdown-item" href="#" onclick="viewFilteredEvents(this)"></a>
       </li>
     </template>
 
     <template id="tableRowTemplate">
       <tr>
-        <td data-id="event">Event Name</td>
-        <td data-id="city">City</td>
-        <td data-id="state">State</td>
-        <td data-id="attendance">Attendance</td>
-        <td data-id="date">Date</td>
+        <td data-id="event"></td>
+        <td data-id="city"></td>
+        <td data-id="state"></td>
+        <td data-id="attendance"></td>
+        <td data-id="date"></td>
       </tr>
     </template>
 
@@ -227,14 +227,14 @@
               <div class="modal-body">
                 <div class="my-1 lead">
                   <label for="Event Name" class="form-label">Event Name</label>
-                  <input name="Event Name" class="form-control" type="text" placeholder="Event"/>
+                  <input name="Event Name" class="form-control" id="newEventName" type="text" placeholder="Event"/>
                 </div>
                 <div class="my-1 lead">
                     <label for="City" class="form-label">City</label>
-                    <input name="City" class="form-control" type="text" placeholder="City"/>
+                    <input name="City" class="form-control" id="newEventCity" type="text" placeholder="City"/>
                 </div>
                 <div class="my-1 lead"><label for="State" class="form-label">State</label>
-                  <select name="State" class="form-select" aria-label="Select a State">
+                  <select name="State" class="form-select" id="newEventState" aria-label="Select a State">
                       <option value="" selected>Choose a state...</option>
                           <option value="AL">Alabama</option>
                           <option value="AK">Alaska</option>
@@ -291,17 +291,17 @@
                 </div>
                 <div class="my-1 lead">
                     <label for="Attendance" class="form-label">Attendance</label>
-                    <input name="Attendance" class="form-control" type="text" placeholder="Attendance"/>
+                    <input name="Attendance" class="form-control" id="newEventAttendance" type="text" placeholder="Attendance"/>
                 </div>
                 <div class="my-1 lead">
                     <label for="Event Date" class="form-label">Date</label>
-                    <input name="Event Date" class="form-control" type="date" />
+                    <input name="Event Date" id="newEventDate" class="form-control" type="date" />
                 </div>
                       </div>
               
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" onclick="saveNewEvent()">Save</button>
               </div>
              </form>
         </div>

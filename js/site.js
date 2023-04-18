@@ -69,7 +69,7 @@ function buildDropDown() {
   let dropdownMenu = document.getElementById("eventDropDown");
   dropdownMenu.innerHTML = "";
 
-  let currentEvents = events; // todo - get these from storage
+  let currentEvents = getEventData();
 
   let cityNames = currentEvents.map((event) => event.city);
   let citiesSet = new Set(cityNames);
@@ -81,9 +81,9 @@ function buildDropDown() {
   let dropdownItemNode = document.importNode(dropdownTemplate.content, true);
 
   // make our changes
-  let dropdownItemLink = dropdownItemNode.querySelector("a");
-  dropdownItemLink.innerText = "All Cities";
-  dropdownItemLink.setAttribute("data-string", "All");
+  let dropdownItemLink = dropdownItemNode.querySelector('a');
+  dropdownItemLink.innerText = 'All Cities';
+  dropdownItemLink.setAttribute('data-string', 'All');
 
   // add our copy to the page
   dropdownMenu.appendChild(dropdownItemNode);
@@ -94,15 +94,17 @@ function buildDropDown() {
 
     // generate a dropdown element
     let itemNode = document.importNode(dropdownTemplate.content, true);
-    let anchorTag = itemNode.querySelector("a");
+    let anchorTag = itemNode.querySelector('a');
     anchorTag.innerText = cityName;
-    anchorTag.setAttribute("data-string", cityName);
+    anchorTag.setAttribute('data-string', cityName);
 
     // append it to the dropdown menu
     dropdownMenu.appendChild(itemNode);
   }
 
   displayEventData(currentEvents);
+  displayStats(currentEvents);
+  document.getElementById('location').innerText = 'All Events';
 }
 
 function displayEventData(currentEvents) {
@@ -120,8 +122,134 @@ function displayEventData(currentEvents) {
     tableRow.querySelector('[data-id="city"]').textContent = event.city;
     tableRow.querySelector('[data-id="state"]').textContent = event.state;
     tableRow.querySelector('[data-id="attendance"]').textContent = event.attendance;
-    tableRow.querySelector('[data-id="date"]').textContent = event.date;
+    tableRow.querySelector('[data-id="date"]').textContent = new Date(event.date).toLocaleDateString();
 
     eventTable.appendChild(tableRow);
   }
+}
+
+function calculateStats(currentEvents) {
+  let total = 0;
+  let average = 0
+  let most = 0;
+  let least = currentEvents[0].attendance;
+
+  for (let i = 0; i < currentEvents.length; i++) {
+    let currentAttendance = currentEvents[i].attendance;
+
+    total += currentAttendance;
+
+    if (currentAttendance > most) {
+      most = currentAttendance;
+    }
+
+    if(currentAttendance < least) {
+      least = currentAttendance;
+    }
+  }
+
+  average = total / currentEvents.length;
+
+  let stats = {
+    total: total,
+    average: average,
+    most: most,
+    least: least
+  }
+
+  return stats;
+}
+
+function displayStats(currentEvents) {
+  let statistics = calculateStats(currentEvents);
+
+  document.getElementById('total').textContent = statistics.total.toLocaleString();
+  document.getElementById('average').textContent = Math.round(statistics.average).toLocaleString();
+  document.getElementById('most').textContent = statistics.most.toLocaleString();
+  document.getElementById('least').textContent = statistics.least.toLocaleString();
+}
+
+function getEventData() {
+  let data = localStorage.getItem('jvSuperDogEventData');
+
+  if (data == null) {
+    localStorage.setItem('jvSuperDogEventData', JSON.stringify(events));
+  }
+
+  let currentEvents = data == null ? events : JSON.parse(data);
+
+  // if (data == null) {
+  //  currentEvents = events;
+  // } else {
+  //  currentEvents = JSON.parse(data);
+  // }
+
+  return currentEvents;
+}
+
+function viewFilteredEvents(dropdownItem) {
+  let cityName = dropdownItem.getAttribute('data-string');
+
+  // get all my events
+  let allEvents = getEventData();
+
+  if (cityName == 'All') {
+    displayStats(allEvents);
+    displayEventData(allEvents);
+    document.getElementById('location').innerText = 'All Events';
+
+    return;
+  }
+
+  // filter those events to just the selected city
+  let filteredEvents = allEvents.filter(event => event.city.toLowerCase() == cityName.toLowerCase());
+
+  // same as above
+  // let filteredEvents2 = allEvents.filter(
+  //  function (event) {
+  //  return event.city.toLowerCase() == cityName.toLowerCase();
+  // });
+  
+  // display the stats for those events
+  displayStats(filteredEvents);
+
+  // change the stats header
+  document.getElementById('location').innerText = cityName;
+
+  // display only those events in the table
+  displayEventData(filteredEvents);
+}
+
+function saveNewEvent() {
+  // get the form input values
+  let name = document.getElementById('newEventName').value;
+  let city = document.getElementById('newEventCity').value;
+  let attendance = parseInt(document.getElementById('newEventAttendance').value, 10);
+
+  let dateValue = document.getElementById('newEventDate').value;
+  dateValue = new Date(dateValue);
+
+  let date = dateValue.toLocaleDateString();
+
+  let stateSelect = document.getElementById('newEventState');
+  let selectedIndex = stateSelect.selectedIndex;
+  let state = stateSelect.options[selectedIndex].text;
+
+  // create a new event object
+  let newEvent = {
+    event: name,
+    city: city,
+    state: state,
+    attendance: attendance,
+    date: date,
+  };
+
+  // add it to the array of current events
+  let events = getEventData();
+  events.push(newEvent);
+
+  // then, save the array with the new event
+  localStorage.setItem('jvSuperDogEventData', JSON.stringify(events));
+
+  buildDropDown();
 }
