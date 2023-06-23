@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "SuperDog"
+		"liveServer.settings.multiRootWorkspaceName": "SuperDog",
+		"liveServer.settings.port": 5501
 	}
 }
