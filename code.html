@@ -69,25 +69,26 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/app.html">The App</a>
+                <a class="nav-link" href="/app.html">Rapid Write</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/code.html">The Code</a>
+                <a class="nav-link active" aria-current="page" href="/code.html">Backend</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="https://github.com/danvitmon/RapidWrite"
-                  >The Repo</a
+                <a class="nav-link" href="https://github.com/danvitmon/RapidWrite" target="_blank"
+                  >Repository</a
                 >
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
                   href="https://danielmsportfolio.netlify.app/"
+                  target="_blank"
                   >My Portfolio</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="https://bloggedin-4b73ab94fb79.herokuapp.com/">Blog</a>
+                <a class="nav-link" href="https://bloggedin-4b73ab94fb79.herokuapp.com/" target="_blank">My Blog</a>
                 <!-- CHANGE THI -->
               </li>
             </ul>
@@ -97,7 +98,7 @@
     </header>
 
     <main class="container mt-3">
-        <h1 class="border-bottom border-2 border-dark">The Code</h1>
+        <h1 class="border-bottom border-2 border-dark">Backend</h1>
         <div class="row">
             <div class="col-12 col-lg-8">
                 <pre class="line-numbers">
@@ -361,7 +362,7 @@ function saveNewEvent() {
                 </pre>
             </div>
             <div class="col-12 col-lg-4">
-                <p>The code is structured in seven functions. The first 65 lines that comprise of the events variable, are just text that we put into the table so we don't have to put a bunch in manually. <hr/>The first function, buildDropDown, is responsible for building the dropdown menu for specific cities, instead of listing every city that was input by the user. <hr/>The second function, displayEventData, is responsible for displaying the event data of the events input by the user. This function creates a table and template for the user input events. The function then pulls the data from the text the user input, and assigns it values. It then displays the values on the table, using the template it made. <hr/>The third function calculates the various attendance stats that will be displayed in a later function. These values are taken from the currentAttendance value, and are then used in various statements to calculate the stats. They are then assigned values, and returned. <hr/>The fourth function displays those stats by pulling those values and inserting them into the table with the user's preferred structure. <hr/>The next function is tasked with getting the event data and presenting it in a readable manner. The function gets data from the local storage the user created, and then transforms it into strings from the original object that it was. This data is then returned since it now usable for us. <hr/>The next function has to filter through the events and only pick unique cities to display their respective attendance numbers. It gets all of the event data first, and then checks what the dropdown menu name is. The user then picks what city data they want, and the function filters through the events, picking unique cities but collecting the data from those same cities. It then displays the data from that city. <hr/>The final function allows the user to add a new event to the event table. It assigns strings to the user input values, and inserts this data into a new event object. This object is then put into the events variable and combined with the previous event array. This is all stored into the users local storage, so that it doesn't disappear if the user exits or refreshes the page. Finally, it calls the buildDropDown function again, since a new event has been given.</p>
+                <p>The code is structured in seven functions. The first 65 lines that comprise of the events variable, are just text that we put into the table so we don't have to put a bunch in manually. <br/><br/>The first function, buildDropDown, is responsible for building the dropdown menu for specific cities, instead of listing every city that was input by the user. <br/><br/>The second function, displayEventData, is responsible for displaying the event data of the events input by the user. This function creates a table and template for the user input events. The function then pulls the data from the text the user input, and assigns it values. It then displays the values on the table, using the template it made. <br/><br/>The third function calculates the various attendance stats that will be displayed in a later function. These values are taken from the currentAttendance value, and are then used in various statements to calculate the stats. They are then assigned values, and returned. <br/><br/>The fourth function displays those stats by pulling those values and inserting them into the table with the user's preferred structure. <br/><br/>The next function is tasked with getting the event data and presenting it in a readable manner. The function gets data from the local storage the user created, and then transforms it into strings from the original object that it was. This data is then returned since it now usable for us. <br/><br/>The next function has to filter through the events and only pick unique cities to display their respective attendance numbers. It gets all of the event data first, and then checks what the dropdown menu name is. The user then picks what city data they want, and the function filters through the events, picking unique cities but collecting the data from those same cities. It then displays the data from that city. <br/><br/>The final function allows the user to add a new event to the event table. It assigns strings to the user input values, and inserts this data into a new event object. This object is then put into the events variable and combined with the previous event array. This is all stored into the users local storage, so that it doesn't disappear if the user exits or refreshes the page. Finally, it calls the buildDropDown function again, since a new event has been given.</p>
             </div>
         </div>
     </main>
@@ -374,19 +375,19 @@ function saveNewEvent() {
           <img src="/img/FOOTER (5).png" height="80" />
         </div>
         <div class="col text-md-end py-2">
-          <a href="https://www.linkedin.com/in/daniel-monastirsky-1625ba173"
+          <a href="https://www.linkedin.com/in/daniel-monastirsky-1625ba173" target="_blank"
             ><i
               class="bi bi-linkedin socialicons p-2"
               style="font-size: 1.5em"
             ></i
           ></a>
-          <a href="https://github.com/danvitmon"
+          <a href="https://github.com/danvitmon" target="_blank"
             ><i
               class="bi bi-github socialicons p-2"
               style="font-size: 1.5em"
             ></i
           ></a>
-          <a href="https://www.youtube.com/channel/UC8MUuKgHxmTa1aHw9DhV_LA"
+          <a href="https://www.youtube.com/channel/UC8MUuKgHxmTa1aHw9DhV_LA" target="_blank"
             ><i
               class="bi bi-youtube socialicons p-2"
               style="font-size: 1.5em"

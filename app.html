@@ -67,26 +67,27 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/app.html"
-                  >The App</a
+                  >Rapid Write</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/code.html">The Code</a>
+                <a class="nav-link" href="/code.html">Backend</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="https://github.com/danvitmon/RapidWrite"
-                  >The Repo</a
+                <a class="nav-link" href="https://github.com/danvitmon/RapidWrite" target="_blank"
+                  >Repository</a
                 >
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
                   href="https://danielmsportfolio.netlify.app/"
+                  target="_blank"
                   >My Portfolio</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="https://bloggedin-4b73ab94fb79.herokuapp.com/">Blog</a>
+                <a class="nav-link" href="https://bloggedin-4b73ab94fb79.herokuapp.com/" target="_blank">My Blog</a>
                 <!-- CHANGE THIS -->
               </li>
             </ul>
@@ -97,7 +98,7 @@
 
     <main class="container mt-3">
       <div class="row">
-        <div class="col-12 col-sm-6">
+        <div class="col-6">
           <div class="dropdown my-3">
             <button
               class="btn btn-secondary dropdown-toggle"
@@ -123,28 +124,28 @@
             <tbody>
               <tr>
                 <td>Total Attendance</td>
-                <td id="total"></td>
+                <td id="total" class="text-end"></td>
               </tr>
               <tr>
                 <td>Average Attendance</td>
-                <td id="average"></td>
+                <td id="average" class="text-end"></td>
               </tr>
               <tr>
                 <td>Most Attendance</td>
-                <td id="most"></td>
+                <td id="most" class="text-end"></td>
               </tr>
               <tr>
                 <td>Least Attendance</td>
-                <td id="least"></td>
+                <td id="least" class="text-end"></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="col-12 col-sm-6 order-first order-sm-last">
+        <div class="col-5 text-end">
           <img src="/img/rapid track1.png" class="img-fluid p-5 h-75" />
         </div>
       </div>
-      <div>
+      <div class="">
         <a
           role="button"
           data-bs-toggle="modal"
@@ -152,18 +153,23 @@
           class="mb-3 btn btn-lg btn-secondary my-3"
           >Add Data
         </a>
+        <div
+          style="float: right;"
+          class="mb-3 btn btn-lg btn-primary my-3 justify-content-end disabled"
+          >Click an event to edit it
+        </div>
         <div class="table-responsive">
           <table class="table table-striped table-hover">
-            <thead class="table-dark">
+            <thead class="table-dark text-end">
               <tr>
-                <th>Name</th>
+                <th>Event Name</th>
                 <th>City</th>
                 <th>State</th>
                 <th>Attendance</th>
                 <th>Date</th>
               </tr>
             </thead>
-            <tbody id="eventTable">
+            <tbody id="eventTable" class="text-end">
               <!-- event data -->
             </tbody>
           </table>
@@ -179,19 +185,19 @@
           <img src="/img/FOOTER (5).png" height="80" />
         </div>
         <div class="col text-md-end py-2">
-          <a href="https://www.linkedin.com/in/daniel-monastirsky-1625ba173"
+          <a href="https://www.linkedin.com/in/daniel-monastirsky-1625ba173" target="_blank"
             ><i
               class="bi bi-linkedin socialicons p-2"
               style="font-size: 1.5em"
             ></i
           ></a>
-          <a href="https://github.com/danvitmon"
+          <a href="https://github.com/danvitmon" target="_blank"
             ><i
               class="bi bi-github socialicons p-2"
               style="font-size: 1.5em"
             ></i
           ></a>
-          <a href="https://www.youtube.com/channel/UC8MUuKgHxmTa1aHw9DhV_LA"
+          <a href="https://www.youtube.com/channel/UC8MUuKgHxmTa1aHw9DhV_LA" target="_blank"
             ><i
               class="bi bi-youtube socialicons p-2"
               style="font-size: 1.5em"
@@ -355,7 +361,7 @@
                 data-bs-dismiss="modal"
                 aria-label="Close"
               >
-                Close
+                Cancel
               </button>
               <button
                 type="button"
